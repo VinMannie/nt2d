@@ -64,6 +64,52 @@ pre
     word-wrap: break-word;
  }
 
+ /****************************************** 2D Renderer ******************************************/
+
+.this-p
+{
+    display: inline-block;
+    line-height: 0;
+    padding-left: 5px;
+}
+
+.this-div
+{
+    box-sizing: border-box;
+    margin: 0;
+    line-height: 0;
+}
+
+.this-span
+{
+    position: relative;
+    box-sizing: border-box;
+    background-color: black;
+    border: 1px solid #0f0f0f;
+    display: inline-block;
+    text-align: center;
+}
+
+.next-span
+{
+    box-sizing: border-box;
+    background-color: black;
+    border: 1px solid #0f0f0f;
+    display: inline-block;
+    text-align: center;
+}
+
+#gf-div, #gf1-div, #gf2-div
+{
+    width:  100%;
+    height: calc(100vh - 120px);
+}
+
+#piece-div, #piece1-div, #piece2-div
+{
+    width:  100%;
+}
+
  /****************************************** Level Cards ******************************************/
 
 .card

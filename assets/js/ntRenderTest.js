@@ -5,6 +5,14 @@ let configCallback;
 let startLevel = 0;
 let selectedId = 0;
 
+/**************************************** Resize Listener ****************************************/
+
+window.addEventListener("resize", () => 
+{
+    $('#pieceCanvas').width($('#pieceCanvas').parent().width());
+    ntRenderer.resize();
+});
+
 /*************************************** Button Listeners ****************************************/
 
 $( document ).ready(function()
@@ -263,7 +271,7 @@ window.onunload = () => {};
 /*********************************** Game Engine And Renderer ************************************/
 
 //Create a new NT game renderer.
-ntRenderer = new NTRender(showStats);
+ntRenderer = new NTRender2d(showStats, $("#gf-div"), $("#piece-div"));
 
 //Create a new game engine.
 ntEngine = new NTEngine(123456789, renderHandler);
@@ -279,35 +287,3 @@ ntInput = new NTInput((request, param) => ntEngine.ntRequest(request, param));
 
 //Allows inputs to be disabled during animations.
 ntRenderer.enableInputCallback = (en) => {ntInput.enableInputs(en)};
-
-//----------------- Game Field ------------------
-//Get canvas to render the game field on.
-let canvas = document.getElementById("renderCanvas");
-
-//Create a new babylon engine.
-let engine = new BABYLON.Engine(canvas, true);
-
-//Call the createScene function.
-let scene = ntRenderer.gfCreateScene(engine, canvas);
-
-//Register a Babylon render loop to repeatedly render the scene.
-engine.runRenderLoop(function () { scene.render(); });
-
-//Watch for browser/canvas resize events.
-window.addEventListener("resize", function () { engine.resize(); });
-
-//----------------- Next Piece ------------------
-//Get canvas to render the next piece on.
-let npCanvas = document.getElementById("pieceCanvas");
-
-//Create a new babylon engine.
-let npEngine = new BABYLON.Engine(npCanvas, true);
-
-//Call the createScene function.
-let npScene = ntRenderer.npCreateScene(npEngine);
-
-//Register a Babylon render loop to repeatedly render the scene.
-npEngine.runRenderLoop(function () { npScene.render(); });
-
-//Watch for browser/canvas resize events.
-window.addEventListener("resize", function () { npEngine.resize(); });
